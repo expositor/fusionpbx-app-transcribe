@@ -70,7 +70,7 @@ class transcribe_togetherai implements transcribe_interface {
 	}
 
 	public function set_language(string $audio_language) {
-		$this->language = $audio_language;
+		$this->language = null;
 	}
 
 	public function set_translate(string $audio_translate) {
@@ -82,7 +82,7 @@ class transcribe_togetherai implements transcribe_interface {
 	}
 
 	public function is_language_enabled() : bool {
-		return true;
+		return false;
 	}
 
 	public function is_translate_enabled() : bool {
@@ -441,10 +441,6 @@ class transcribe_togetherai implements transcribe_interface {
 		$post_data['model'] = $this->api_model;
 		$post_data['response_format'] = 'verbose_json';
 		$post_data['timestamp_granularities[]'] = 'segment';
-
-		if (!empty($this->language)) {
-			$post_data['language'] = $this->language;
-		}
 
 		if (!empty($this->message)) {
 			$post_data['prompt'] = $this->message;
